@@ -29,11 +29,6 @@ def callback():
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    # line_bot_api.reply_message(
-    #     event.reply_token,
-    #     TextSendMessage(text=event.message.text)
-    # )
-
     # LINE傳過來的訊息
     message_text = str(event.message.text).lower()
 
