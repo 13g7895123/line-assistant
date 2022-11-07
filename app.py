@@ -1,19 +1,39 @@
-
-from flask import Flask, render_template
+from flask import Flask, request, abort
+from line_bot_api import *
 
 app = Flask(__name__)
+
 
 @app.route('/')
 def home():
     return '234'
 
-@app.route('/.well-known/pki-validation/<string:text_name>/')
-def ssl_test(str):
-    return '2344'
 
-@app.route('/.well-known/pki-validation/EB8B3233208300C9948562303D9F3A84.txt/')
-def EB8B3233208300C9948562303D9F3A84():
-    return render_template("EB8B3233208300C9948562303D9F3A84.txt")
+# 接收 LINE 的資訊
+@app.route("/callback", methods=['POST'])
+def callback():
+    signature = request.headers['X-Line-Signature']
+
+    body = request.get_data(as_text=True)
+    app.logger.info("Request body: " + body)
+
+    try:
+        handler.handle(body, signature)
+    except InvalidSignatureError:
+        abort(400)
+
+    return 'OK'
+
+
+# 學你說話
+@handler.add(MessageEvent, message=TextMessage)
+def echo(event):
+    if event.source.user_id != "Udeadbeefdeadbeefdeadbeefdeadbeef":
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=event.message.text)
+        )
+
 
 if __name__ == '__main__':
     app.run()
