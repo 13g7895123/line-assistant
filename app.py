@@ -1,5 +1,6 @@
 from flask import Flask, request, abort
 from line_bot_api import *
+from events.winmai import *
 
 app = Flask(__name__)
 
@@ -25,13 +26,19 @@ def callback():
     return 'OK'
 
 
-# 學你說話
+# 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
-def echo(event):
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=event.message.text)
-    )
+def handle_message(event):
+    # line_bot_api.reply_message(
+    #     event.reply_token,
+    #     TextSendMessage(text=event.message.text)
+    # )
+
+    # LINE傳過來的訊息
+    message_text = str(event.message.text).lower()
+
+    if message_text == 'socket':
+        socket()
 
 
 if __name__ == '__main__':
