@@ -38,7 +38,7 @@ def handle_message(event):
     message_text = str(event.message.text).lower()
 
     if message_text == 'socket':
-        socket()
+        socket(event)
 
 
 if __name__ == '__main__':
