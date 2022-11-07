@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return 'test page!'
+    return 'This is test page.'
 
 
 # 接收 LINE 的資訊
