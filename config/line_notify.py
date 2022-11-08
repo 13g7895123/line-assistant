@@ -1,2 +1,2 @@
 # Line Token
-token = 'W4Trvnii3ORUZpusao0lqIAsLVWFXqhoxTyyOwjVBb5'
+token = 'bcFaOibTXjqn1df74YWjYUn350oipMlT4CLZeQwEVW0'
