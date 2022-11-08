@@ -4,6 +4,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from config.web_address import *
 from line_notify import *
+import pymysql
+from config.db_mysql import *
 
 
 def crawler_chickpt():
@@ -32,13 +34,45 @@ def crawler_chickpt():
             # 判斷是否有關鍵字
             for key_word in key_word_list:
                 if key_word in title:
-                    money = li.find_element(By.XPATH,
-                                            "a/div[@class='is-blk']/p[@class='job_detail']/span[@class='salary']").text
-                    location = li.find_element(By.XPATH,
-                                               "a/div[@class='is-blk']/p[@class='job_detail']/span[@class='place']").text
-                    link = li.find_element(By.XPATH, "a").get_attribute('href')
-                    msg = '\n標題: ' + title + '\n價格: ' + money + '\n地點: ' + location + '\n' + link
-                    line_notify(msg)
+                    # 取出DB資料
+                    db_config = config_db_config
+                    conn = pymysql.connect(**db_config)
+                    try:
+                        with conn.cursor() as cursor:
+                            command = "SELECT * FROM crawler_chickpt"
+                            cursor.execute(command)
+                            data = cursor.fetchall()
+                            title_list = []
+                            if len(data) > 0:
+                                # 更新進LIST
+                                for j in range(len(data)):
+                                    title = data[j][1]
+                                    title_list.append(title)
+                    except Exception as ex:
+                        print(ex)
+                    finally:
+                        conn.close()
+                    if title not in title_list:
+                        money = li.find_element(By.XPATH,
+                                                "a/div[@class='is-blk']/p[@class='job_detail']/span[@class='salary']").text
+                        location = li.find_element(By.XPATH,
+                                                   "a/div[@class='is-blk']/p[@class='job_detail']/span[@class='place']").text
+                        link = li.find_element(By.XPATH, "a").get_attribute('href')
+                        msg = '\n標題: ' + title + '\n價格: ' + money + '\n地點: ' + location + '\n' + link
+                        line_notify(msg)
+                        # 更新DB資料
+                        db_config = config_db_config
+                        conn = pymysql.connect(**db_config)
+                        try:
+                            with conn.cursor() as cursor:
+                                command = "INSERT INTO crawler_chickpt(title, price, location, link)" \
+                                          "VALUES(%s, %s, %s, %s)"
+                                cursor.execute(command, (title, money.split('$')[1], location, link))
+                                conn.commit()
+                        except Exception as ex:
+                            print(ex)
+                        finally:
+                            conn.close()
 
 
 crawler_chickpt()
