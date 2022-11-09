@@ -1,5 +1,4 @@
 from flask import Flask, request, abort
-from line_bot_api import *
 from events.winmai import *
 from events.crawler import *
 
