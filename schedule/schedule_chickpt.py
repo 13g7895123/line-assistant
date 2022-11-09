@@ -36,4 +36,6 @@ def schedule_chickpt():
 
 scheduler = BlockingScheduler(timezone="Asia/Taipei")
 scheduler.add_job(schedule_chickpt, 'interval', minutes=3)
+chickpt_breathe()
+schedule_chickpt()
 scheduler.start()
