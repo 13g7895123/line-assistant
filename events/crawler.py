@@ -15,7 +15,8 @@ def breathe_chickpt(event):
             if len(data) > 0:
                 update_time = data[0][2]
                 msg = '【小雞上工：查詢上次更新時間】\n' + str(update_time)
-                push_msg(juid, msg)
+                text_message = TextSendMessage(msg)
+                line_bot_api.reply_message(event.reply_token, text_message)
     except Exception as ex:
         print(ex)
     finally:
