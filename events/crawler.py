@@ -21,7 +21,8 @@ def get_data():
 
 
 def breathe_chickpt(event):
-    update_time = get_data()
+    # update_time = get_data()
+    update_time = '111'
     msg = '【小雞上工：查詢上次更新時間】\n' + str(update_time)
     text_message = TextSendMessage(str(msg))
     line_bot_api.reply_message(event.reply_token, text_message)
