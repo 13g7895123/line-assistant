@@ -19,6 +19,7 @@ def breathe_chickpt(event):
     finally:
         conn.close()
 
-    msg = '【小雞上工：查詢上次更新時間】\n' + str(update_time)
+    # msg = '【小雞上工：查詢上次更新時間】\n' + str(update_time)
+    msg = 'testt'
     text_message = TextSendMessage(msg)
     line_bot_api.reply_message(event.reply_token, text_message)
