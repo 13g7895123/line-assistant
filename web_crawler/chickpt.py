@@ -2,12 +2,11 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
-from line_bot_push_message import *
 from config.web_address import *
 from line_notify import *
 import pymysql
-from config.db_mysql import *
-# from line_bot_push_message import *
+from .config.db_mysql import *
+from .line_bot_push_message import *
 
 
 def crawler_chickpt():
