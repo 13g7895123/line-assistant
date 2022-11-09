@@ -1,6 +1,7 @@
 from flask import Flask, request, abort
 from line_bot_api import *
 from events.winmai import *
+from events.crawler import *
 
 app = Flask(__name__)
 
@@ -34,6 +35,8 @@ def handle_message(event):
 
     if message_text == 'socket':
         socket(event)
+    if message_text == 'breath_chickpt':
+        breathe_chickpt(event)
 
 
 if __name__ == '__main__':
