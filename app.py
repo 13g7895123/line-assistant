@@ -35,7 +35,7 @@ def handle_message(event):
 
     if message_text == 'socket':
         socket(event)
-    if message_text == 'breath_chickpt':
+    if message_text == 'breathe_chickpt':
         breathe_chickpt(event)
 
 
