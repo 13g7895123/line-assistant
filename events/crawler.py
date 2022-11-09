@@ -1,7 +1,6 @@
 from line_bot_api import *
 import pymysql
 from config.db_mysql import *
-from line_bot_push_message import *
 
 
 def breathe_chickpt(event):
