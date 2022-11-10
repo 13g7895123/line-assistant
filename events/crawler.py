@@ -1,6 +1,4 @@
 from line_bot_api import *
-
-from config.db_mysql import *
 from app import *
 
 
@@ -26,12 +24,10 @@ from app import *
 
 
 def breathe_chickpt(event):
-    cursor = mysql.connection.cursor()
     command = "SELECT * FROM crawler_log WHERE NAME='chickpt'"
-    cursor.execute(command)
-    data = cursor.fetchall()
+    data = db.engine.execute(command)
     # update_time = get_data()
     update_time = '111'
-    msg = '【小雞上工：查詢上次更新時間】\n' + str(update_time)
+    msg = '【小雞上工：查詢上次更新時間】\n' + str(data[0][2])
     text_message = TextSendMessage(str(msg))
     line_bot_api.reply_message(event.reply_token, text_message)

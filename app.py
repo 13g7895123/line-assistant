@@ -2,17 +2,15 @@ from flask import Flask, request, abort
 from events.winmai import *
 from events.crawler import *
 from flask_mysqldb import MySQL
+from flask_sqlalchemy import SQLAlchemy
 
+db = SQLAlchemy()
 app = Flask(__name__)
-
-mysql = MySQL()
-mysql.init_app(app)
-app.config['MYSQL_USER'] = 'user_name'
-app.config['MYSQL_PASSWORD'] = 'user_password'
-app.config['MYSQL_HOST'] = 'sql3.example.net'
-app.config['MYSQL_DB'] = 'Database_name'
-app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
-mysql = MySQL(app)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://' \
+                                        'line_assistant_remote:820820@139.162.15.125:3306' \
+                                        '/db_line_assistant'
+db.init_app(app)
 
 
 @app.route('/')
