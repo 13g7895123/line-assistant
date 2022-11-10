@@ -6,13 +6,13 @@ from pymysql import *
 from flask_sqlalchemy import SQLAlchemy
 # from extensions import db, migrate
 
-db = SQLAlchemy()
+# db = SQLAlchemy()
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://' \
-                                        'line_assistant_user:820820@localhost:3306' \
-                                        '/db_line_assistant'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db.init_app(app)
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://' \
+#                                         'line_assistant_user:820820@localhost:3306' \
+#                                         '/db_line_assistant'
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# db.init_app(app)
 
 
 @app.route('/')
@@ -22,9 +22,9 @@ def home():
 
 @app.route('/db')
 def db():
-    command = "SELECT * FROM crawler_log WHERE NAME='chickpt'"
-    data = db.engine.execute(command)
-    print(data)
+    # command = "SELECT * FROM crawler_log WHERE NAME='chickpt'"
+    # data = db.engine.execute(command)
+    # print(data)
     return 'ok'
 
 
