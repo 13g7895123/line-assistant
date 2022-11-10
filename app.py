@@ -1,8 +1,18 @@
 from flask import Flask, request, abort
 from events.winmai import *
 from events.crawler import *
+from flask_mysqldb import MySQL
 
 app = Flask(__name__)
+
+mysql = MySQL()
+mysql.init_app(app)
+app.config['MYSQL_USER'] = 'user_name'
+app.config['MYSQL_PASSWORD'] = 'user_password'
+app.config['MYSQL_HOST'] = 'sql3.example.net'
+app.config['MYSQL_DB'] = 'Database_name'
+app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+mysql = MySQL(app)
 
 
 @app.route('/')
