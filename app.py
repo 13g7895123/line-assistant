@@ -2,7 +2,7 @@ from flask import Flask, request, abort
 from events.winmai import *
 from events.crawler import *
 # from flask_mysqldb import MySQL
-# from pymysql import *
+from pymysql import *
 from flask_sqlalchemy import SQLAlchemy
 # from extensions import db, migrate
 
