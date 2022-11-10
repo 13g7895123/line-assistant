@@ -22,8 +22,8 @@ def home():
 
 @app.route('/db')
 def db():
-    # command = "SELECT * FROM crawler_log WHERE NAME='chickpt'"
-    # data = db.engine.execute(command)
+    command = "SELECT * FROM crawler_log WHERE NAME='chickpt'"
+    data = db.engine.execute(command)
     # print(data)
     return 'ok'
 
