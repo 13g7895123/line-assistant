@@ -2,20 +2,30 @@ from flask import Flask, request, abort
 from events.winmai import *
 from events.crawler import *
 from flask_mysqldb import MySQL
+from pymysql import *
 from flask_sqlalchemy import SQLAlchemy
+# from extensions import db, migrate
 
 db = SQLAlchemy()
 app = Flask(__name__)
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://' \
-                                        'line_assistant_remote:820820@139.162.15.125:3306' \
+                                        'line_assistant_user:820820@localhost:3306' \
                                         '/db_line_assistant'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
 
 @app.route('/')
 def home():
     return 'This is test page.'
+
+
+@app.route('/db')
+def db():
+    command = "SELECT * FROM crawler_log WHERE NAME='chickpt'"
+    data = db.engine.execute(command)
+    print(data)
+    return 'ok'
 
 
 # 接收 LINE 的資訊
