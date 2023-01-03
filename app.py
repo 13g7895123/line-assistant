@@ -1,5 +1,6 @@
 from flask import Flask, request, abort
 from events.winmai import *
+from events.web import *
 from events.crawler import *
 # from flask_mysqldb import MySQL
 from pymysql import *
@@ -52,6 +53,8 @@ def handle_message(event):
 
     if message_text == 'socket':
         socket(event)
+    if message_text == 'weather':
+        weather(event)
     # if message_text == 'breathe_chickpt':
         # breathe_chickpt(event)
 
