@@ -2,8 +2,9 @@ from line_bot_api import *
 import requests
 
 
-def weather(event):
-    city = 'tainan'
+def weather(event, message_text):
+
+    city = message_text.split('-')[1]
     api_key = 'b85f1d04ed29cb2e9f8acc9c041658b0'
     address = f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}'
 

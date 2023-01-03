@@ -5,6 +5,7 @@ from events.crawler import *
 # from flask_mysqldb import MySQL
 from pymysql import *
 from flask_sqlalchemy import SQLAlchemy
+from line_bot_api import *
 # from extensions import db, migrate
 
 db = SQLAlchemy()
@@ -53,8 +54,10 @@ def handle_message(event):
 
     if message_text == 'socket':
         socket(event)
-    if message_text == 'weather':
-        weather(event)
+    if message_text[:7] == 'weather':
+        weather(event, message_text)
+    # if message_text != '':
+    #     line_bot_api.reply_message(event.reply_token, message_text) 
     # if message_text == 'breathe_chickpt':
         # breathe_chickpt(event)
 
