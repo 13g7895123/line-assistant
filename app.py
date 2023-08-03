@@ -60,8 +60,8 @@ def handle_message(event):
     if message_text == 'uid':
         push_msg(event)
 
-    # if message_text != '':
-    #     line_bot_api.reply_message(event.reply_token, message_text) 
+    if message_text != '':
+        line_bot_api.reply_message(event.reply_token, message_text) 
     # if message_text == 'breathe_chickpt':
         # breathe_chickpt(event)
 
