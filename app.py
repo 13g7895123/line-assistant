@@ -46,7 +46,6 @@ def callback():
 
     return 'OK'
 
-
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
@@ -67,4 +66,5 @@ def handle_message(event):
 
 
 if __name__ == '__main__':
+    app.debug = True
     app.run()
