@@ -1,7 +1,8 @@
 from flask import Flask, request, abort
 from events.winmai import *
-from events.web import *
+from events.weather import *
 from events.crawler import *
+from events.push_msg import *
 # from flask_mysqldb import MySQL
 from pymysql import *
 from flask_sqlalchemy import SQLAlchemy
@@ -56,6 +57,9 @@ def handle_message(event):
         socket(event)
     if message_text[:7] == 'weather':
         weather(event, message_text)
+    if message_text == 'uid':
+        push_msg(event)
+
     # if message_text != '':
     #     line_bot_api.reply_message(event.reply_token, message_text) 
     # if message_text == 'breathe_chickpt':
