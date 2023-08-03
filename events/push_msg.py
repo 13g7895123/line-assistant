@@ -1,3 +1,5 @@
+from line_bot_api import *
+
 def push_msg(event):
     uid = event.source.userId
 
